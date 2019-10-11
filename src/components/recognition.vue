@@ -65,10 +65,8 @@ export default {
       if (event.results.length > 0) {
         let result = event.results[0][0].transcript;
         // ウェイクアップかどうかを判別せずに全ての音声データをサーバに送るのはセキュリティ上の不安があるが、サーバサイドにロジックを集中することを優先
-        // https://web-ai-speaker.herokuapp.com/
         // that.request("POST", "http://localhost:8080/speech", result)
-        //that.request("POST", "TODO please fix me!!", result)
-        that.request("POST", "https://web-ai-speaker.herokuapp.com:8080/speech", result)
+        that.request("POST", "https://web-ai-speaker-backend.herokuapp.com/:5000/speech", result)
       }
       that.recognition.stop();
     }
@@ -89,7 +87,7 @@ export default {
 
     // For network test
     //this.request("POST", "http://localhost:8080/speech", "ハローワールド タピオカ")
-    this.request("POST", "https://web-ai-speaker.herokuapp.com:8080/speech", "ハローワールド タピオカ")
+    this.request("POST", "https://web-ai-speaker-backend.herokuapp.com/:5000/speech", "ハローワールド タピオカ")
   },
 }
 
