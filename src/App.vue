@@ -51,6 +51,9 @@ export default {
       this.recog_state = Boolean(btn_state)
     }
   },
+	mounted: function(){
+		document.title = "Web AI Speaker";
+	}
 };
 </script>
 
