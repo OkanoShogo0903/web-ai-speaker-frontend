@@ -21,7 +21,7 @@
         v-bind:explain="`Recognition`"
         v-on:child-event="recogStateChange"
       />
-      <recognition
+      <card_cluster
         v-bind:recog_state="recog_state"
       />
     </v-content>
@@ -30,7 +30,7 @@
 
 <script>
 
-import recognition from './components/recognition';
+import card_cluster from './components/card_cluster';
 import explanation from './components/explanation';
 import state_button from './components/state_button';
 
@@ -44,16 +44,16 @@ export default {
   components: {
     explanation,
     state_button,
-    recognition,
+    card_cluster,
   },
   methods: {
     recogStateChange: function (btn_state) {
       this.recog_state = Boolean(btn_state)
     }
   },
-	mounted: function(){
-		document.title = "Web AI Speaker";
-	}
+    mounted: function(){
+        document.title = "Web AI Speaker";
+    }
 };
 </script>
 
