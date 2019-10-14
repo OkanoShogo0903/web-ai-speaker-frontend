@@ -8,5 +8,3 @@ var vm = new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-vm.a = 2

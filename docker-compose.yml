@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  frontend:
+    build: .
+    ports:
+      - 1145:1145
+    volumes:
+      - .:/app
