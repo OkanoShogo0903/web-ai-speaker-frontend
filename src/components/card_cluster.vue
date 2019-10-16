@@ -7,7 +7,7 @@
         dark
     >
         <v-card-text class="white--text" >
-            <div class=".overline" style="text-align:center; font-weight:bold;">{{ res.question }}</div>
+            <h4 class=".overline font-weight-bold" style="text-align:center; font-weight:bold;">{{ res.question }}</h4>
             <br>
             <div style="display:flex;">
                 <div class=".overline" style="margin-right:auto;">{{ res.text }}</div>

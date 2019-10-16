@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>Web AI Speaker</span>
-        <span class="font-weight-light"> ver1.1 </span>
+        <span class="font-weight-light"> ver1.2 </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
