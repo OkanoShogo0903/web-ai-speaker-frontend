@@ -1,6 +1,6 @@
 <template>
     <v-layout justify-center wrap>
-        <h4 class="headline font-weight-bold mb-0" >"ハローワールド"と呼びかけてから、 調べたい単語を質問してみてください</h4>
+        <h4 class=".overline font-weight-bold mb-0" >"ハローワールド"と呼びかけてから、 調べたい単語を質問してみてください</h4>
   	
         <div class=".overline mb-12">div overline 1</div>
         <h1 class=".overline mb-12">overline 1</h1>

@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
+      <v-toolbar-title class=".overline text-uppercase">
         <span>Web AI Speaker</span>
         <span class="font-weight-light"> ver1.2 </span>
       </v-toolbar-title>
