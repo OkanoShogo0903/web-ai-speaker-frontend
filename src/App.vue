@@ -2,8 +2,8 @@
   <v-app dark>
     <v-app-bar app>
       <v-toolbar-title class="text-uppercase">
-        <span class=".overline">Web AI Speaker</span>
-        <span class=".overline font-weight-light"> ver1.2 </span>
+        <span class=".subtitle-1">Web AI Speaker</span>
+        <span class=".subtitle-1 font-weight-light"> ver1.2 </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn

@@ -7,7 +7,7 @@
         dark
     >
         <v-card-text class="white--text" >
-            <h4 class=".overline font-weight-bold" style="text-align:center; font-weight:bold;">{{ res.question }}</h4>
+            <h4 class=".overline" style="text-align:center; font-weight:bold;">{{ res.question }}</h4>
             <br>
             <div style="display:flex;">
                 <div class=".overline" style="margin-right:auto;">{{ res.text }}</div>
@@ -34,8 +34,9 @@ export default {
   },
   props: ['recog_state'],
   methods: {
-      ai_speaker_request(body_text) {
-          axios.post(this.ai_speaker_endpoint, {text: body_text})
+      ai_speaker_request(url, body_text) {
+          console.log(body_text)
+          axios.post(url, {text: body_text})
           .then(res => {
               if(res.status === 200){
                   this.addResult(res.data.text, res.data.question)
@@ -88,14 +89,14 @@ export default {
   },
 
   created: function() {
+      let that = this
       this.recognition.lang = "ja-JP";
       this.recognition.continuous = false;
-      let that = this
       this.recognition.onresult = function(event) {
           if (event.results.length > 0) {
               let result = event.results[0][0].transcript;
               // ウェイクアップワードを含むかどうかを判別せずに日常会話かもしれないテキストを全てサーバに送るのはプライバシー・セキュリティ上の不安があるが、サーバサイドにロジックを集中することを優先
-              that.ai_speaker_request(result)
+              that.ai_speaker_request(that.ai_speaker_endpoint, result)
           }
           that.recognition.stop();
       }
@@ -118,7 +119,7 @@ export default {
       //this.text2speech_request("音声合成エンジンによる音声です")
 
       // For network test
-      this.ai_speaker_request("ハローワールド タピオカ")
+      this.ai_speaker_request(this.ai_speaker_endpoint, "ハローワールド タピオカ")
   },
 }
 
