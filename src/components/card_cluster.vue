@@ -46,7 +46,6 @@ export default {
               console.log(error);
           })
           .finally( res => {
-              this.$emit('reach-request-event')
           });
       },
       text2speech_request(body_text) {
@@ -87,14 +86,24 @@ export default {
       addResult(text, question){
           this.responses.unshift({text: text, question: question})
           //console.log(this.responses);
+      },
+      watchCatTimer(that){
+          let switch_check = setInterval(function() {
+              if (that.recog_state === true){
+                clearInterval(switch_check);
+                that.recognition.start();
+              }
+          }, 100); // [ms]
       }
-
   },
 
   created: function() {
       let that = this
       this.recognition.lang = "ja-JP";
       this.recognition.continuous = false;
+      this.recognition.onspeechstart = () => {
+          this.$emit('onspeechstart-event')
+      };
       this.recognition.onresult = function(event) {
           console.log(event.results)
           if (event.results.length > 0) {
@@ -105,18 +114,10 @@ export default {
           that.recognition.stop();
       }
       this.recognition.onend = () => {
-        // Continue
-        let switch_check = setInterval(function() {
-            if (that.recog_state === true){
-              clearInterval(switch_check);
-              that.recognition.start();
-            }
-        }, 500);
+          that.$emit('reach-request-event')
+          that.watchCatTimer(that) // Continue recognition
       };
-      this.recognition.onspeechstart = () => {
-          this.$emit('onspeechstart-event')
-      };
-      this.recognition.start();
+      this.watchCatTimer(that)
 
       // For tutorial
       this.addResult("マイクを許可して、 「ハローワールド、チュートリアルについて検索」 と言って見ましょう", "チュートリアル")

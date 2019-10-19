@@ -8,7 +8,7 @@
           <v-btn
             color="accent" large width=200 elevation=24
             @click="clickBtn">
-            {{ explain }}
+            Let's speak something
           </v-btn>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <v-btn
           color="accent" large width=200 elevation=24 outlined 
           @click="clickBtn">
-          {{ explain }}
+          let's activate!
         </v-btn>
       </div>
     </v-layout>
@@ -27,7 +27,7 @@ export default {
   props: ['explain', 'is_progress'],
   data: function() {
     return {
-        state_switch: true, //init state
+        state_switch: false, // ボタンがサービス開始のボタンであることを理解してもらいたくて、初めに押してもらいたい.そのため初めはFalse.
     }
   },
   methods: {
@@ -37,7 +37,6 @@ export default {
     }
   },
   created: function() {
-      // ページがリロードされた時はスイッチがデフォルトでオンとなり、認識が始まる仕様
       this.$emit('click-event', this.state_switch)
   },
 }

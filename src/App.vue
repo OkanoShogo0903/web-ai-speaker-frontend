@@ -55,9 +55,11 @@ export default {
       this.recog_state = Boolean(btn_state)
     },
     onSpeech: function () {
+      console.log("onSpeech")
       this.is_progress = true
     },
     reachRequest: function () {
+      console.log("reachRequest")
       this.is_progress = false
     }
   },
