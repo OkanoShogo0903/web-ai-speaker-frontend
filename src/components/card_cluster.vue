@@ -34,16 +34,19 @@ export default {
   },
   props: ['recog_state'],
   methods: {
-      ai_speaker_request(url, body_text) {
+      card_request(body_text) {
           console.log(body_text)
-          axios.post(url, {text: body_text})
+          axios.post(this.ai_speaker_endpoint, {text: body_text})
           .then(res => {
-              if(res.status === 200){
+              if(res.status === 200 || res.status === 210){
                   this.addResult(res.data.text, res.data.question)
               }
           })
           .catch(error => {
               console.log(error);
+          })
+          .finally( res => {
+              this.$emit('reach-request-event')
           });
       },
       text2speech_request(body_text) {
@@ -93,10 +96,11 @@ export default {
       this.recognition.lang = "ja-JP";
       this.recognition.continuous = false;
       this.recognition.onresult = function(event) {
+          console.log(event.results)
           if (event.results.length > 0) {
               let result = event.results[0][0].transcript;
               // ウェイクアップワードを含むかどうかを判別せずに日常会話かもしれないテキストを全てサーバに送るのはプライバシー・セキュリティ上の不安があるが、サーバサイドにロジックを集中することを優先
-              that.ai_speaker_request(that.ai_speaker_endpoint, result)
+              that.card_request(result)
           }
           that.recognition.stop();
       }
@@ -109,7 +113,9 @@ export default {
             }
         }, 500);
       };
-
+      this.recognition.onspeechstart = () => {
+          this.$emit('onspeechstart-event')
+      };
       this.recognition.start();
 
       // For tutorial
@@ -119,7 +125,7 @@ export default {
       //this.text2speech_request("音声合成エンジンによる音声です")
 
       // For network test
-      this.ai_speaker_request(this.ai_speaker_endpoint, "ハローワールド タピオカ")
+      this.card_request("ハローワールド タピオカ")
   },
 }
 

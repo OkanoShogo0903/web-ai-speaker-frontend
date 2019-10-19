@@ -19,10 +19,13 @@
       <explanation/>
       <state_button
         v-bind:explain="`Recognition`"
-        v-on:child-event="recogStateChange"
+        v-bind:is_progress="is_progress"
+        v-on:click-event="changeRecogState"
       />
       <card_cluster
         v-bind:recog_state="recog_state"
+        v-on:onspeechstart-event="onSpeech"
+        v-on:reach-request-event="reachRequest"
       />
     </v-content>
   </v-app>
@@ -39,6 +42,7 @@ export default {
   data: function() {
     return {
       recog_state: false,
+      is_progress: false,
     }
   },
   components: {
@@ -47,13 +51,19 @@ export default {
     card_cluster,
   },
   methods: {
-    recogStateChange: function (btn_state) {
+    changeRecogState: function (btn_state) {
       this.recog_state = Boolean(btn_state)
+    },
+    onSpeech: function () {
+      this.is_progress = true
+    },
+    reachRequest: function () {
+      this.is_progress = false
     }
   },
-    mounted: function(){
-        document.title = "Web AI Speaker";
-    }
+  mounted: function(){
+      document.title = "Web AI Speaker";
+  }
 };
 </script>
 
