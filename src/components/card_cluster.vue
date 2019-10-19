@@ -85,7 +85,6 @@ export default {
       },
       addResult(text, question){
           this.responses.unshift({text: text, question: question})
-          //console.log(this.responses);
       },
       watchCatTimer(that){
           let switch_check = setInterval(function() {
@@ -101,20 +100,21 @@ export default {
       let that = this
       this.recognition.lang = "ja-JP";
       this.recognition.continuous = false;
+      //this.recognition.interimResults = true;
       this.recognition.onspeechstart = () => {
           this.$emit('onspeechstart-event')
       };
       this.recognition.onresult = function(event) {
-          console.log(event.results)
           if (event.results.length > 0) {
               let result = event.results[0][0].transcript;
-              // ウェイクアップワードを含むかどうかを判別せずに日常会話かもしれないテキストを全てサーバに送るのはプライバシー・セキュリティ上の不安があるが、サーバサイドにロジックを集中することを優先
-              that.card_request(result)
+              console.log(result)
+              that.$emit('stt-event', result)
+              that.card_request(result) // ウェイクアップワードを含むかどうかを判別せずに日常会話かもしれないテキストを全てサーバに送るのはプライバシー・セキュリティ上の不安があるが、サーバサイドにロジックを集中することを優先
           }
           that.recognition.stop();
       }
       this.recognition.onend = () => {
-          that.$emit('reach-request-event')
+          that.$emit('stt-end-event')
           that.watchCatTimer(that) // Continue recognition
       };
       this.watchCatTimer(that)
@@ -126,7 +126,7 @@ export default {
       //this.text2speech_request("音声合成エンジンによる音声です")
 
       // For network test
-      this.card_request("ハローワールド タピオカ")
+      //this.card_request("ハローワールド タピオカ")
   },
 }
 

@@ -22,10 +22,14 @@
         v-bind:is_progress="is_progress"
         v-on:click-event="changeRecogState"
       />
+      <text_area
+        v-bind:text="stt_text"
+      />
       <card_cluster
         v-bind:recog_state="recog_state"
+        v-on:stt-event="stt"
+        v-on:stt-end-event="endStt"
         v-on:onspeechstart-event="onSpeech"
-        v-on:reach-request-event="reachRequest"
       />
     </v-content>
   </v-app>
@@ -33,8 +37,9 @@
 
 <script>
 
-import card_cluster from './components/card_cluster';
+import text_area from './components/text_area';
 import explanation from './components/explanation';
+import card_cluster from './components/card_cluster';
 import state_button from './components/state_button';
 
 export default {
@@ -43,9 +48,11 @@ export default {
     return {
       recog_state: false,
       is_progress: false,
+      stt_text: "",
     }
   },
   components: {
+    text_area,
     explanation,
     state_button,
     card_cluster,
@@ -55,12 +62,13 @@ export default {
       this.recog_state = Boolean(btn_state)
     },
     onSpeech: function () {
-      console.log("onSpeech")
       this.is_progress = true
     },
-    reachRequest: function () {
-      console.log("reachRequest")
+    endStt: function () {
       this.is_progress = false
+    },
+    stt: function (text) {
+      this.stt_text = text
     }
   },
   mounted: function(){
