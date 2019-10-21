@@ -1,22 +1,12 @@
 <template>
   <v-app dark>
-    <v-app-bar app>
-      <v-toolbar-title class="text-uppercase">
-        <span class=".subtitle-1">Web AI Speaker</span>
-        <span class=".subtitle-1 font-weight-light"> ver1.2 </span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/OkanoShogo0903?tab=repositories"
-        target="_blank"
-      >
-        <span class="mr-2">Author Github</span>
-      </v-btn>
-    </v-app-bar>
-
+    <toolbar
+      v-bind:title="title"
+    />
     <v-content>
-      <explanation/>
+      <explanation
+        v-bind:text="`${wakeup_word}と呼びかけてから、 調べたい単語を質問してみてください`"
+      />
       <state_button
         v-bind:explain="`Recognition`"
         v-bind:is_progress="is_progress"
@@ -26,6 +16,7 @@
         v-bind:text="stt_text"
       />
       <card_cluster
+        v-bind:wakeup_word="wakeup_word"
         v-bind:recog_state="recog_state"
         v-on:stt-event="stt"
         v-on:stt-end-event="endStt"
@@ -36,7 +27,7 @@
 </template>
 
 <script>
-
+import toolbar from './components/toolbar';
 import text_area from './components/text_area';
 import explanation from './components/explanation';
 import card_cluster from './components/card_cluster';
@@ -46,12 +37,15 @@ export default {
   name: 'App',
   data: function() {
     return {
+      wakeup_word: "ハロー",
+      title: "Display side assistant", // Web AI Speaker
       recog_state: false,
       is_progress: false,
       stt_text: "",
     }
   },
   components: {
+    toolbar,
     text_area,
     explanation,
     state_button,
@@ -72,7 +66,7 @@ export default {
     }
   },
   mounted: function(){
-      document.title = "Web AI Speaker";
+      document.title = this.title;
   }
 };
 </script>

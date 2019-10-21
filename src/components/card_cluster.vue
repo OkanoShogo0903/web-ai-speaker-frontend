@@ -32,7 +32,7 @@ export default {
       speech2text_endpoint: "https://api.apigw.smt.docomo.ne.jp/crayon/v1/textToSpeech?APIKEY=", // "http://localhost:8080/speech"
     }
   },
-  props: ['recog_state'],
+  props: ['recog_state', 'wakeup_word'],
   methods: {
       card_request(body_text) {
           console.log(body_text)
@@ -120,7 +120,7 @@ export default {
       this.watchCatTimer(that)
 
       // For tutorial
-      this.addResult("マイクを許可して、 「ハローワールド、チュートリアルについて検索」 と言って見ましょう", "チュートリアル")
+      this.addResult("マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", "チュートリアル")
 
       // For TTS test
       //this.text2speech_request("音声合成エンジンによる音声です")
