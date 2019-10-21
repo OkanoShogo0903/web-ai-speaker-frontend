@@ -12,6 +12,9 @@
 
     </v-btn>
     -->
+    <v-btn icon>
+      <v-icon>mdi-anchor</v-icon>
+    </v-btn>
 
     <v-btn icon @click="$emit('help-event')">
     <v-tooltip bottom>

@@ -24,8 +24,6 @@
 </template>
 
 <script>
-import HelpCircle from 'vue-material-design-icons/HelpCircle.vue';
-
 export default {
   props: ['is_overlay'],
   data: function() {
