@@ -1,7 +1,13 @@
 <template>
   <v-app dark>
+    <help
+      v-bind:is_overlay="is_help"
+      v-on:help-event="toggleHelpOverlay"
+    />
     <toolbar
+      v-bind:version="version"
       v-bind:title="title"
+      v-on:help-event="toggleHelpOverlay"
     />
     <v-content>
       <explanation
@@ -27,6 +33,7 @@
 </template>
 
 <script>
+import help from './components/help';
 import toolbar from './components/toolbar';
 import text_area from './components/text_area';
 import explanation from './components/explanation';
@@ -37,14 +44,17 @@ export default {
   name: 'App',
   data: function() {
     return {
+      version: "1.4",
       wakeup_word: "ハロー",
       title: "Display side assistant", // Web AI Speaker
       recog_state: false,
       is_progress: false,
+      is_help: false,
       stt_text: "",
     }
   },
   components: {
+    help,
     toolbar,
     text_area,
     explanation,
@@ -63,6 +73,9 @@ export default {
     },
     stt: function (text) {
       this.stt_text = text
+    },
+    toggleHelpOverlay: function () {
+      this.is_help = !this.is_help
     }
   },
   mounted: function(){

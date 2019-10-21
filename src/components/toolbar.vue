@@ -1,20 +1,27 @@
 <template>
   <v-app-bar app>
     <v-toolbar-title class="text-uppercase">
-      <span class=".subtitle-1"> {{ title }}</span>
-      <span class=".subtitle-1 font-weight-light"> ver1.3 </span>
+      <span class="mr-1"> {{ title }}</span>
+      <span class="mr-1 font-weight-light"> ver{{ version }} </span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
 
     <!--
     <v-btn icon>
       <v-icon>account-arrow-right</v-icon>
+
     </v-btn>
     -->
 
-    <v-btn icon>
-      <v-icon>mdi-help-circle</v-icon>
+    <v-btn icon @click="$emit('help-event')">
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-icon v-on="on">mdi-help-circle</v-icon>
+      </template>
+      <span>使い方</span>
+    </v-tooltip>
     </v-btn>
+
 
     <v-btn
       text
@@ -24,6 +31,7 @@
       <span class="mr-2">Author Github</span>
     </v-btn>
   </v-app-bar>
+
 </template>
 
 
@@ -31,7 +39,7 @@
 import HelpCircle from 'vue-material-design-icons/HelpCircle.vue';
 
 export default {
-  props: ['title'],
+  props: ['title', 'version'],
   components: {
     HelpCircle,
   },
