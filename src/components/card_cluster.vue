@@ -7,11 +7,13 @@
         dark
     >
         <v-card-text class="white--text" >
-            <h4 class=".overline" style="text-align:center; font-weight:bold;">{{ res.question }}</h4>
+            <h4 class=".overline" style="text-align:center; font-weight:bold;">{{ res.title }}</h4>
             <br>
             <div style="display:flex;">
                 <div class=".overline" style="margin-right:auto;">{{ res.text }}</div>
-            <br>
+            </div>
+            <div v-if="res.is_video">
+              <Bgm v-bind:videoId="res.video_id" />
             </div>
         </v-card-text>
     </v-card>
@@ -22,6 +24,7 @@
 
 <script>
 import axios from 'axios';
+import Bgm from './Bgm';
 
 export default {
   data: function() {
@@ -33,13 +36,23 @@ export default {
     }
   },
   props: ['recog_state', 'wakeup_word'],
+  components: {
+    Bgm,
+  },
   methods: {
       card_request(body_text) {
           console.log(body_text)
           axios.post(this.ai_speaker_endpoint, {text: body_text})
           .then(res => {
+              console.log(res)
               if(res.status === 200 || res.status === 210){
-                  this.addResult(res.data.text, res.data.question)
+                  if(res.data.type == 0){
+                    this.addResult(res.data.title, res.data.text, false, null)
+                  }
+                  else if (res.data.type == 1){
+                    this.addResult(res.data.title, null, true, res.data.videoid)
+                    //this.$refs.youtube.pauseVideo();
+                  }
               }
           })
           .catch(error => {
@@ -83,8 +96,8 @@ export default {
                   console.log(error);
           });
       },
-      addResult(text, question){
-          this.responses.unshift({text: text, question: question})
+      addResult(title, text, is_video, video_id){
+          this.responses.unshift({title: title, text: text, is_video: is_video, video_id: video_id})
       },
       watchCatTimer(that){
           let switch_check = setInterval(function() {
@@ -120,13 +133,15 @@ export default {
       this.watchCatTimer(that)
 
       // For tutorial
-      this.addResult("マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", "チュートリアル")
+      this.addResult("チュートリアル", "マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", false, null)
 
       // For TTS test
       //this.text2speech_request("音声合成エンジンによる音声です")
 
       // For network test
-      //this.card_request("ハローワールド タピオカ")
+      //this.card_request("タピオカについて検索")
+    
+      this.card_request("グランドエスケープを再生して")
   },
 }
 

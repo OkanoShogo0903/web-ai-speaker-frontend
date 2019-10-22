@@ -2,15 +2,17 @@
   <div class="text-center">
     <v-overlay :value="is_overlay" :opacity="opacity">
       <div>
-        対応ワード <br/><br/>
+        このサービスについて <br/><br/>
+        PCで全画面ゲームやFPSとかのリアルタイム対人ゲームしてる時にブラウザに戻るのって面倒だよね <br/>
+        これはそんな時にサブディスプレイにこのブラウザを開いておけば音声認識だけで検索したりBGMを流したりできるサービスです <br/><br/><br/>
 
         検索系 <br/>
         〜について検索して <br/>
-        〜を調べて <br/><br/>
+        〜を調べて <br/><br/><br/>
         
         BGM再生 <br/>
         〜を再生して <br/>
-        〜を流して <br/><br/>
+        〜を流して <br/><br/><br/>
       </div>
 
       <v-btn
