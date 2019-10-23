@@ -13,7 +13,8 @@
                 <div class=".overline" style="margin-right:auto;">{{ res.text }}</div>
             </div>
             <div v-if="res.is_video">
-              <Bgm v-bind:videoId="res.video_id" />
+              <Bgm ref="tube" v-bind:videoId="res.video_id" v-bind:videoTitle="res.title">
+              </Bgm>
             </div>
         </v-card-text>
     </v-card>
@@ -50,8 +51,14 @@ export default {
                     this.addResult(res.data.title, res.data.text, false, null)
                   }
                   else if (res.data.type == 1){
+                    // Call pause_video in all of previous request
+                    for (var i = 0; i < this.responses.length; ++i) {
+                        console.log(i)
+                        if (this.responses[i].is_video) {
+                            this.$refs.tube[i].pause_video()
+                        }
+                    }
                     this.addResult(res.data.title, null, true, res.data.videoid)
-                    //this.$refs.youtube.pauseVideo();
                   }
               }
           })
@@ -141,7 +148,7 @@ export default {
       // For network test
       //this.card_request("タピオカについて検索")
     
-      this.card_request("グランドエスケープを再生して")
+      //this.card_request("グランドエスケープを再生して")
   },
 }
 

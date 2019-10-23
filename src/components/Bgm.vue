@@ -2,7 +2,7 @@
 <template>
   <v-layout justify-center>
     <v-row no-gutters>
-    <youtube :video-id="videoId" ref="youtube" @playing="playing" @ready="ready" @paused="paused" dopause="pauseVideo" fitParent></youtube>
+    <youtube :video-id="videoId" ref="youtube" @playing="playing" @ready="ready" @paused="paused" fitParent></youtube>
     </v-row>
   </v-layout>
 </template>
@@ -13,10 +13,10 @@ import VueYoutube from 'vue-youtube'
  
 Vue.use(VueYoutube)
 export default {
-  props: ['videoId'],
+  props: ['videoId', 'videoTitle'],
   methods: {
-    pauseVideo() {
-      console.log("pauseVideo")
+    pause_video() {
+      console.log("pauseVideo " + videoTitle)
       this.player.pauseVideo()
     },
     playing() {
@@ -26,6 +26,7 @@ export default {
       //console.log("paused")
     },
     ready() {
+      console.log("ready " + videoTitle)
       this.player.playVideo()
     }
   },
