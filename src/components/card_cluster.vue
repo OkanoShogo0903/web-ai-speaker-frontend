@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import Vue from 'vue'
 import Bgm from './Bgm';
+import axios from 'axios';
 
 export default {
   data: function() {
@@ -52,12 +53,15 @@ export default {
                   }
                   else if (res.data.type == 1){
                     // Call pause_video in all of previous request
+                    this.$event_bus.$emit('pause-event');
+                    /*
                     for (var i = 0; i < this.responses.length; ++i) {
                         console.log(i)
                         if (this.responses[i].is_video) {
                             this.$refs.tube[i].pause_video()
                         }
                     }
+                    */
                     this.addResult(res.data.title, null, true, res.data.videoid)
                   }
               }
@@ -106,7 +110,7 @@ export default {
       addResult(title, text, is_video, video_id){
           this.responses.unshift({title: title, text: text, is_video: is_video, video_id: video_id})
       },
-      watchCatTimer(that){
+      watchCatTimer(that){ // スイッチの状態監視 犬じゃなくて猫だよ
           let switch_check = setInterval(function() {
               if (that.recog_state === true){
                 clearInterval(switch_check);
@@ -148,6 +152,7 @@ export default {
       // For network test
       //this.card_request("タピオカについて検索")
     
+      //this.card_request("ハローワールドを再生して")
       //this.card_request("グランドエスケープを再生して")
   },
 }

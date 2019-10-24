@@ -1,40 +1,43 @@
 <template>
   <v-app dark>
-    <help
-      v-bind:is_overlay="is_help"
-      v-on:help-event="toggleHelpOverlay"
+  <help
+    v-bind:is_overlay="is_help"
+    v-on:help-event="toggleHelpOverlay"
+  />
+  <toolbar
+    v-bind:version="version"
+    v-bind:title="title"
+    v-bind:drawer="drawer"
+    v-on:help-event="toggleHelpOverlay"
+  />
+  <v-content>
+    <side_menu/>
+    <explanation
+      v-bind:text="`${wakeup_word}と呼びかけてから、 調べたい単語を質問してみてください`"
     />
-    <toolbar
-      v-bind:version="version"
-      v-bind:title="title"
-      v-on:help-event="toggleHelpOverlay"
+    <state_button
+      v-bind:explain="`Recognition`"
+      v-bind:is_progress="is_progress"
+      v-on:click-event="changeRecogState"
     />
-    <v-content>
-      <explanation
-        v-bind:text="`${wakeup_word}と呼びかけてから、 調べたい単語を質問してみてください`"
-      />
-      <state_button
-        v-bind:explain="`Recognition`"
-        v-bind:is_progress="is_progress"
-        v-on:click-event="changeRecogState"
-      />
-      <text_area
-        v-bind:text="stt_text"
-      />
-      <card_cluster
-        v-bind:wakeup_word="wakeup_word"
-        v-bind:recog_state="recog_state"
-        v-on:stt-event="stt"
-        v-on:stt-end-event="endStt"
-        v-on:onspeechstart-event="onSpeech"
-      />
-    </v-content>
+    <text_area
+      v-bind:text="stt_text"
+    />
+    <card_cluster
+      v-bind:wakeup_word="wakeup_word"
+      v-bind:recog_state="recog_state"
+      v-on:stt-event="stt"
+      v-on:stt-end-event="endStt"
+      v-on:onspeechstart-event="onSpeech"
+    />
+  </v-content>
   </v-app>
 </template>
 
 <script>
 import help from './components/help';
 import toolbar from './components/toolbar';
+import side_menu from './components/side_menu'
 import text_area from './components/text_area';
 import explanation from './components/explanation';
 import card_cluster from './components/card_cluster';
@@ -51,11 +54,13 @@ export default {
       is_progress: false,
       is_help: false,
       stt_text: "",
+      drawer: true
     }
   },
   components: {
     help,
     toolbar,
+    side_menu,
     text_area,
     explanation,
     state_button,
@@ -84,3 +89,19 @@ export default {
 };
 </script>
 
+<style lang="scss">
+	
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+.container {
+  max-width: 900px;
+}
+pre {
+  font-family: Consolas, monospace;
+  color: #000;
+  background: #fff;
+  border-radius: 2px;
+  padding: 15px;
+  line-height: 1.5;
+  overflow: auto;
+}
+</style>

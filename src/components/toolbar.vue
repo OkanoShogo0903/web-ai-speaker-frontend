@@ -1,5 +1,7 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app clipped-left>
+    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+
     <v-toolbar-title class="text-uppercase">
       <span class="mr-1"> {{ title }}</span>
       <span class="mr-1 font-weight-light"> ver{{ version }} </span>
@@ -42,7 +44,7 @@
 import HelpCircle from 'vue-material-design-icons/HelpCircle.vue';
 
 export default {
-  props: ['title', 'version'],
+  props: ['title', 'version', 'drawer'],
   components: {
     HelpCircle,
   },
