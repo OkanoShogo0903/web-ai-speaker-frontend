@@ -23,6 +23,13 @@
       </v-list-item>
     </v-list>
 
+    <v-btn
+      color="primary"
+      depressed
+    >
+      <v-icon left>{{ icons.mdiDelete }}</v-icon>
+      Delete
+    </v-btn>
 
     <v-row
       align="center"
@@ -53,7 +60,7 @@
     mdiShareVariant,
     mdiDelete,
   } from '@mdi/js'
-import { mdiSettingsOutline } from '@mdi/js';
+//import { mdiSettingsOutline } from '@mdi/js';
 export default {
     data() {
         return {
