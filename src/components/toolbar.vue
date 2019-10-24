@@ -14,14 +14,10 @@
 
     </v-btn>
     -->
-    <v-btn icon>
-      <v-icon>mdi-anchor</v-icon>
-    </v-btn>
-
     <v-btn icon @click="$emit('help-event')">
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-icon v-on="on">mdi-help-circle</v-icon>
+        <v-icon v-on="on">{{ icons.mdiHelpCircle }}</v-icon>
       </template>
       <span>使い方</span>
     </v-tooltip>
@@ -41,13 +37,19 @@
 
 
 <script>
-import HelpCircle from 'vue-material-design-icons/HelpCircle.vue';
+import {
+  mdiHelpCircle,
+} from '@mdi/js'
 
 export default {
   props: ['title', 'version', 'drawer'],
-  components: {
-    HelpCircle,
-  },
+    data() {
+        return {
+          icons: {
+            mdiHelpCircle,
+          },
+        }
+    }
 }
 </script>
 
