@@ -1,5 +1,12 @@
 <template>
   <v-app dark>
+  <stt
+    v-bind:recog_state="recog_state"
+    v-on:stt-event="resultSTT"
+    v-on:stt-end-event="endSTT"
+    v-on:onspeechstart-event="onSpeech"
+  />
+  <tts/>
   <help
     v-bind:is_overlay="is_help"
     v-on:help-event="toggleHelpOverlay"
@@ -7,7 +14,7 @@
   <toolbar
     v-bind:version="version"
     v-bind:title="title"
-    v-bind:drawer="drawer"
+    v-bind:drawer="`true`"
     v-on:help-event="toggleHelpOverlay"
   />
   <v-content>
@@ -25,16 +32,14 @@
     />
     <card_cluster
       v-bind:wakeup_word="wakeup_word"
-      v-bind:recog_state="recog_state"
-      v-on:stt-event="stt"
-      v-on:stt-end-event="endStt"
-      v-on:onspeechstart-event="onSpeech"
     />
   </v-content>
   </v-app>
 </template>
 
 <script>
+import stt from './components/stt';
+import tts from './components/tts';
 import help from './components/help';
 import toolbar from './components/toolbar';
 import side_menu from './components/side_menu'
@@ -54,10 +59,11 @@ export default {
       is_progress: false,
       is_help: false,
       stt_text: "",
-      drawer: true
     }
   },
   components: {
+    stt,
+    tts,
     help,
     toolbar,
     side_menu,
@@ -73,10 +79,10 @@ export default {
     onSpeech: function () {
       this.is_progress = true
     },
-    endStt: function () {
+    endSTT: function () {
       this.is_progress = false
     },
-    stt: function (text) {
+    resultSTT: function (text) {
       this.stt_text = text
     },
     toggleHelpOverlay: function () {
@@ -90,7 +96,7 @@ export default {
 </script>
 
 <style lang="scss">
-	
+    
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
 .container {
   max-width: 900px;

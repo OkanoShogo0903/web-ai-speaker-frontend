@@ -20,6 +20,9 @@
       </v-list-item>
     </v-list>
 
+    Speech synthesis
+    <tts_switch/>
+
     <v-btn
       color="primary"
       depressed
@@ -31,19 +34,22 @@
 </template>
 
 <script>
+import tts_switch from './tts_switch';
 import { mdiSettingsOutline } from '@mdi/js';
+
 export default {
-    data() {
-        return {
-          items: [
-            { title: 'Setting', icon: mdiSettingsOutline },
-            { title: 'Account', icon: 'account_box' },
-            { title: 'Admin', icon: 'gavel' },
-          ],
-          icons: {
-            mdiSettingsOutline,
-          },
-        }
+  data: function() {
+    return {
+      items: [
+        { title: 'Setting', icon: mdiSettingsOutline },
+      ],
+      icons: {
+        mdiSettingsOutline,
+      },
     }
+  },
+  components: {
+    tts_switch,
+  },
 }
 </script>

@@ -1,6 +1,8 @@
 <template>
   <v-app-bar app clipped-left>
+    <!--
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    -->
 
     <v-toolbar-title class="text-uppercase">
       <span class="mr-1"> {{ title }}</span>
@@ -17,7 +19,7 @@
     <v-btn icon @click="$emit('help-event')">
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-icon v-on="on">{{ icons.mdiHelpCircle }}</v-icon>
+        <v-icon v-on="on">{{ help_icon }}</v-icon>
       </template>
       <span>使い方</span>
     </v-tooltip>
@@ -37,19 +39,15 @@
 
 
 <script>
-import {
-  mdiHelpCircle,
-} from '@mdi/js'
+import { mdiHelpCircle } from '@mdi/js'
 
 export default {
   props: ['title', 'version', 'drawer'],
     data() {
         return {
-          icons: {
-            mdiHelpCircle,
-          },
+          help_icon: mdiHelpCircle,
         }
-    }
+    },
 }
 </script>
 

@@ -14,9 +14,8 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 Vue.config.productionTip = false
 Vue.use(VueSidebarMenu)
 
-var vm = new Vue({
+Vue.prototype.$event_bus = new Vue(); // Global event bus
+new Vue({
   vuetify,
   render: h => h(App)
-}).$mount('#app')
-
-Vue.prototype.$event_bus = vm
+}).$mount('#app');
