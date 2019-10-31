@@ -6,14 +6,11 @@
   >
   <v-layout>
   <v-container>
-    <v-flex xs12>
       <v-img
         :src="require('../assets/logo.svg')"
-        class="my-3"
         contain
         height="30"
       ></v-img>
-    </v-flex>
 
     <!--
       サービスのアイコン
@@ -43,7 +40,7 @@
       >
         <v-list-item-title v-text="w"></v-list-item-title>
         <v-list-item-icon>
-          <v-icon>mdi-close</v-icon>
+          <v-icon>{{ icon_close }}</v-icon>
         </v-list-item-icon>
       </v-list-item>
       <v-list-item>
@@ -62,13 +59,14 @@
 <script>
 import Vue from 'vue'
 import tts_switch from './tts_switch';
+import { mdiClose } from '@mdi/js';
 import { mdiHelpCircle } from '@mdi/js';
 import { mdiSettingsOutline } from '@mdi/js';
 
 export default {
   data: function() {
     return {
-        icons: [mdiSettingsOutline],
+        icon_close: mdiClose,
         admins: [
           ['ハロー'],
           ['Hello'],

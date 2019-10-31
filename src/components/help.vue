@@ -19,18 +19,20 @@
         icon
         @click="$emit('help-event')"
       >
-        <v-icon>mdi-close</v-icon>
+        <v-icon>{{ icon_close }}</v-icon>
       </v-btn>
     </v-overlay>
   </div>
 </template>
 
 <script>
+import { mdiClose } from '@mdi/js';
 export default {
   props: ['is_overlay'],
   data: function() {
     return {
       opacity: "0.9",
+      icon_close: mdiClose,
     }
   },
 }
