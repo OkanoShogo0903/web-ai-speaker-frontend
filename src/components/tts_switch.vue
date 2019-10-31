@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-switch v-model="switch_state" @change="changeSwitch"></v-switch>
+    <v-switch
+      color="primary"
+      v-model="switch_state"
+      @change="changeSwitch"
+    />
   </div>
 </template>
 

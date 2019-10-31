@@ -8,7 +8,7 @@
           <v-btn
             color="accent" large width=200 elevation=24
             @click="clickBtn">
-            Let's speak something
+            Speak something
           </v-btn>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <v-btn
           color="accent" large width=200 elevation=24 outlined 
           @click="clickBtn">
-          let's activate!
+          Activation
         </v-btn>
       </div>
     </v-layout>

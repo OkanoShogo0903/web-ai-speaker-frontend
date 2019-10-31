@@ -1,4 +1,8 @@
 <template>
+  <!--
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  -->
+
   <v-app dark>
   <stt
     v-bind:recog_state="recog_state"
@@ -32,7 +36,7 @@
       v-bind:text="stt_text"
     />
     <card_cluster
-      v-bind:wakeup_words="wakeup_words[0]"
+      v-bind:wakeup_word="wakeup_words[0]"
     />
   </v-content>
   </v-app>

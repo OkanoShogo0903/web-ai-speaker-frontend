@@ -1,7 +1,12 @@
 <template>
+    <!--
+    <v-col
+      :cols="9"
+    >
+    -->
     <v-card
         color="#385F73"
-        style="width:85%; margin:7px;"
+        style="width:100%; margin:7px;"
         dark
     >
         <v-card-text class="white--text" >
@@ -16,6 +21,9 @@
             </div>
         </v-card-text>
     </v-card>
+    <!--
+    </v-col>
+    -->
 </template>
 
 <script>
