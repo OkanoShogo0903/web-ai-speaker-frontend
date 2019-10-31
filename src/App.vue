@@ -58,7 +58,7 @@ export default {
   name: 'App',
   data: function() {
     return {
-      version: "1.6",
+      version: "1.7",
       wakeup_words: ["ハロー", "Hello"],
       title: "Display side assistant", // Web AI Speaker
       recog_state: false,

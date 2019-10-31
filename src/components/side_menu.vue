@@ -47,8 +47,9 @@
         <v-text-field
           label="追加"
           v-model="new_word"
-          filled
+          outlined 
         ></v-text-field>
+        <!-- single-line filled-->
         <v-list-item-icon>
           <v-icon
             color="primary"
@@ -78,10 +79,6 @@ export default {
         icon_plse: mdiPlusCircle,
         icon_sound: mdiVolumeHigh,
         icon_alphabet: mdiAlphabeticalVariant,
-        admins: [
-          ['ハロー'],
-          ['Hello'],
-        ],
         new_word: "",
     }
   },
@@ -93,6 +90,7 @@ export default {
     addWord(text_area){
         if (text_area !== ""){
             this.wakeup_words.push(text_area)
+            this.new_word = ""
         }
     },
   },
