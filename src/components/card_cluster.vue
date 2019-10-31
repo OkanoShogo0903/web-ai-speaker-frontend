@@ -56,8 +56,8 @@ export default {
       this.addResult({title: "チュートリアル", text: "マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", type: 0, video_id: null})
 
       // For network test
-      this.card_request("タピオカについて検索")
-      //this.card_request("ハローワールドを再生して")
+      //this.card_request("タピオカについて検索")
+      this.card_request("ハローワールドを再生して")
       //this.card_request("グランドエスケープを再生して")
   },
   mounted: function(){

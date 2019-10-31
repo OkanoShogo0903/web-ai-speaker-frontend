@@ -24,9 +24,7 @@
     v-bind:wakeup_words="wakeup_words"
   />
   <v-content>
-    <explanation
-      v-bind:text="`${wakeup_words[0]}と呼びかけてから、 調べたい単語を質問してみてください`"
-    />
+    <explanation v-bind:is_speech="is_already_speech"/>
     <state_button
       v-bind:explain="`Recognition`"
       v-bind:is_progress="is_progress"
@@ -63,6 +61,7 @@ export default {
       title: "Display side assistant", // Web AI Speaker
       recog_state: false,
       is_progress: false,
+      is_already_speech: false,
       is_help: false,
       stt_text: "",
     }
@@ -88,8 +87,12 @@ export default {
     endSTT: function () {
       this.is_progress = false
     },
-    onSttRawResult: function (cutoff_text) {
-      this.stt_text = cutoff_text
+    onSttRawResult: function (raw_text) {
+      let too_long = 20
+      if ( raw_text.length < too_long ){
+        this.is_already_speech = true
+        this.stt_text = raw_text
+      }
     },
     toggleHelpOverlay: function () {
       this.is_help = !this.is_help
