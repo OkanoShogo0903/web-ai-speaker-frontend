@@ -8,26 +8,36 @@
           <v-btn
             color="accent" large width=200 elevation=24
             @click="clickBtn">
-            Speak something
+            <v-icon color="background">
+              {{ icon_on }}
+            </v-icon>
+            <!--Speak something-->
           </v-btn>
         </div>
       </div>
       <div v-else>
         <v-btn
           color="accent" large width=200 elevation=24 outlined 
-          @click="clickBtn">
-          Activation
+          @click="clickBtn"
+        >
+          <v-icon>
+            {{ icon_off }}
+          </v-icon>
+          <!--Activation-->
         </v-btn>
       </div>
     </v-layout>
 </template>
 
 <script>
+import { mdiSpeaker, mdiSpeakerOff} from '@mdi/js';
 export default {
   props: ['explain', 'is_progress'],
   data: function() {
     return {
         state_switch: false, // ボタンがサービス開始のボタンであることを理解してもらいたくて、初めに押してもらいたい.そのため初めはFalse.
+        icon_on: mdiSpeaker,
+        icon_off: mdiSpeakerOff, 
     }
   },
   methods: {

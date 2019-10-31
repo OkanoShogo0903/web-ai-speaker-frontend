@@ -17,13 +17,13 @@
     -->
     <v-divider></v-divider>
 
-    <v-list-group value="true" >
+    <v-list-group :append-icon="icon_append" :prepend-icon="icon_sound">
       <template v-slot:activator>
         <v-list-item-title>読み上げ</v-list-item-title>
       </template>
       <v-list-item>
         <v-list-item-title>
-          OnOff
+          有効にする
         </v-list-item-title>
         <v-list-item-icon>
           <tts_switch/>
@@ -33,7 +33,7 @@
 
     <v-divider></v-divider>
 
-    <v-list-group value="true" >
+    <v-list-group :append-icon="icon_append" :prepend-icon="icon_alphabet">
       <template v-slot:activator>
         <v-list-item-title v-text="`ウェイクアップワード`"/>
       </template>
@@ -45,6 +45,7 @@
       </v-list-item>
       <v-list-item>
         <v-text-field
+          label="追加"
           v-model="new_word"
           filled
         ></v-text-field>
@@ -67,13 +68,16 @@
 <script>
 import Vue from 'vue'
 import tts_switch from './tts_switch';
-import { mdiPlusCircle, mdiClose, mdiHelpCircle, mdiSettingsOutline} from '@mdi/js';
+import { mdiChevronDown, mdiAlphabeticalVariant, mdiVolumeHigh, mdiPlusCircle, mdiClose, mdiHelpCircle, mdiSettingsOutline} from '@mdi/js';
 
 export default {
   data: function() {
     return {
+        icon_append: mdiChevronDown,
         icon_close: mdiClose,
         icon_plse: mdiPlusCircle,
+        icon_sound: mdiVolumeHigh,
+        icon_alphabet: mdiAlphabeticalVariant,
         admins: [
           ['ハロー'],
           ['Hello'],
