@@ -3,6 +3,7 @@
 
 <script>
 import Vue from 'vue'
+import string_treat from './string_treat.vue';
 
 export default {
   data() {
@@ -12,6 +13,7 @@ export default {
     }
   },
   props: ['recog_state'],
+  mixins: [string_treat],
   methods: {
       watchSwitchTimer(that){
           let switch_check = setInterval(function() {
@@ -20,8 +22,7 @@ export default {
                 that.recognition.start();
               }
           }, 100); // [ms]
-      }
-
+      },
   },
   created: function() {
       let that = this
@@ -33,11 +34,12 @@ export default {
       };
       this.recognition.onresult = function(event) {
           if (event.results.length > 0) {
-              let ml_text = event.results[0][0].transcript; // ml: Maximum likelihood
-              console.log(ml_text)
-              that.$emit('stt-event', ml_text)
-              //that.card_request(ml_text)
-              that.$event_bus.$emit('card-request-event', ml_text);
+              let raw_text = event.results[0][0].transcript;
+              that.$event_bus.$emit('stt-raw-event', raw_text)
+              let [have_wakeup, res_text] = that.cutWord(raw_text, that.$wakeup_words)
+              if (have_wakeup){
+                  that.$event_bus.$emit('stt-event', res_text)
+              }
           }
           that.recognition.stop();
       }

@@ -2,7 +2,6 @@
   <v-app dark>
   <stt
     v-bind:recog_state="recog_state"
-    v-on:stt-event="resultSTT"
     v-on:stt-end-event="endSTT"
     v-on:onspeechstart-event="onSpeech"
   />
@@ -17,10 +16,12 @@
     v-bind:drawer="`true`"
     v-on:help-event="toggleHelpOverlay"
   />
+  <side_menu
+    v-bind:wakeup_words="wakeup_words"
+  />
   <v-content>
-    <side_menu/>
     <explanation
-      v-bind:text="`${wakeup_word}と呼びかけてから、 調べたい単語を質問してみてください`"
+      v-bind:text="`${wakeup_words[0]}と呼びかけてから、 調べたい単語を質問してみてください`"
     />
     <state_button
       v-bind:explain="`Recognition`"
@@ -31,13 +32,14 @@
       v-bind:text="stt_text"
     />
     <card_cluster
-      v-bind:wakeup_word="wakeup_word"
+      v-bind:wakeup_words="wakeup_words[0]"
     />
   </v-content>
   </v-app>
 </template>
 
 <script>
+import Vue from 'vue'
 import stt from './components/stt';
 import tts from './components/tts';
 import help from './components/help';
@@ -53,7 +55,7 @@ export default {
   data: function() {
     return {
       version: "1.5",
-      wakeup_word: "ハロー",
+      wakeup_words: ["ハロー", "Hello"],
       title: "Display side assistant", // Web AI Speaker
       recog_state: false,
       is_progress: false,
@@ -82,8 +84,8 @@ export default {
     endSTT: function () {
       this.is_progress = false
     },
-    resultSTT: function (text) {
-      this.stt_text = text
+    onSttRawResult: function (cutoff_text) {
+      this.stt_text = cutoff_text
     },
     toggleHelpOverlay: function () {
       this.is_help = !this.is_help
@@ -91,6 +93,8 @@ export default {
   },
   mounted: function(){
       document.title = this.title;
+      Vue.prototype.$wakeup_words = this.wakeup_words; // Global event bus
+      this.$event_bus.$on('stt-raw-event', this.onSttRawResult)
   }
 };
 </script>

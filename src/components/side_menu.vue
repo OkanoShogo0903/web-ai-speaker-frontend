@@ -4,50 +4,78 @@
     fixed
     app
   >
-    <v-list>
-      <v-list-item
-        v-for="item in items"
-        :key="item.title"
-        link
-      >
+  <v-layout>
+  <v-container>
+    <v-flex xs12>
+      <v-img
+        :src="require('../assets/logo.svg')"
+        class="my-3"
+        contain
+        height="30"
+      ></v-img>
+    </v-flex>
+
+    <!--
+      サービスのアイコン
+    -->
+    <v-divider></v-divider>
+
+    <v-list-group value="true" >
+      <template v-slot:activator>
+        <v-list-item-title>読み上げ</v-list-item-title>
+      </template>
+      <v-list-item>
+        <v-list-item-title>
+          OnOff
+        </v-list-item-title>
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          <tts_switch/>
         </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
       </v-list-item>
-    </v-list>
+    </v-list-group>
 
-    Speech synthesis
-    <tts_switch/>
+    <v-list-group value="true" >
+      <template v-slot:activator>
+        <v-list-item-title>ウェイクアップワード</v-list-item-title>
+      </template>
+      <v-list-item
+        v-for="w in wakeup_words"
+      >
+        <v-list-item-title v-text="w"></v-list-item-title>
+        <v-list-item-icon>
+          <v-icon>mdi-close</v-icon>
+        </v-list-item-icon>
+      </v-list-item>
+      <v-list-item>
+        <v-text-field
+          label="New wakeup word"
+          filled
+        ></v-text-field>
+      </v-list-item>
+    </v-list-group>
 
-    <v-btn
-      color="primary"
-      depressed
-    >
-      <v-icon left>{{ icons.mdiSettingsOutline }}</v-icon>
-      Delete
-    </v-btn>
+  </v-container>
+  </v-layout>
   </v-navigation-drawer>
 </template>
 
 <script>
+import Vue from 'vue'
 import tts_switch from './tts_switch';
+import { mdiHelpCircle } from '@mdi/js';
 import { mdiSettingsOutline } from '@mdi/js';
 
 export default {
   data: function() {
     return {
-      items: [
-        { title: 'Setting', icon: mdiSettingsOutline },
-      ],
-      icons: {
-        mdiSettingsOutline,
-      },
+        icons: [mdiSettingsOutline],
+        admins: [
+          ['ハロー'],
+          ['Hello'],
+        ],
     }
   },
+  props: ['wakeup_words'],
   components: {
     tts_switch,
   },

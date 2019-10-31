@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout justify-center wrap v-for="(res, i) in responses">
-        <card v-bind:response="res" v-bind:index="i" ref="card"/>
+      <card v-bind:response="res" v-bind:index="i" ref="card"/>
     </v-layout>
 
   </v-container>
@@ -30,17 +30,14 @@ export default {
           .then(res => {
               console.log(res)
               if(res.status === 200 || res.status === 210){
-                  if(res.data.type == 0){
-                      //this.addResult(res.data.title, res.data.text, false, null)
-                      this.addResult(res.data)
-                  }
-                  else if (res.data.type == 1){
-                      // Call pause_video in all of previous request
+                  this.addResult(res.data)
+                  /*
+                  if (res.data.type == 1){
+                      // TOOD: デフォルトで先頭のイベントを再生するかどうか
                       //this.$event_bus.$emit('pause-event');
                       //this.$event_bus.$emit('play-event');
-                      //this.addResult(res.data.title, null, true, res.data.videoid)
-                      this.addResult(res.data)
                   }
+                  */
                   this.$event_bus.$emit('tts-request', res.data.text);
               }
           })
@@ -56,7 +53,7 @@ export default {
   },
   created: function() {
       // For tutorial
-      this.addResult({title: "チュートリアル", text: "マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", is_video: false, video_id: null})
+      this.addResult({title: "チュートリアル", text: "マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", type: 0, video_id: null})
 
       // For network test
       this.card_request("タピオカについて検索")
@@ -64,7 +61,7 @@ export default {
       //this.card_request("グランドエスケープを再生して")
   },
   mounted: function(){
-      this.$event_bus.$on('card-request-event', this.card_request)
+      this.$event_bus.$on('stt-event', this.card_request)
   },
 }
 
