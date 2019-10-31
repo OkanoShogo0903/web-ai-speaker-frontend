@@ -39,13 +39,13 @@
 
 
 <script>
-import { mdiHelpCircle } from '@mdi/js'
+import { mdiLightbulbOnOutline } from '@mdi/js'
 
 export default {
   props: ['title', 'version', 'drawer'],
     data() {
         return {
-          help_icon: mdiHelpCircle,
+          help_icon: mdiLightbulbOnOutline,
         }
     },
 }

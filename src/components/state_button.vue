@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import { mdiSpeaker, mdiSpeakerOff} from '@mdi/js';
+import { mdiMicrophone, mdiMicrophoneOff} from '@mdi/js';
 export default {
   props: ['explain', 'is_progress'],
   data: function() {
     return {
         state_switch: false, // ボタンがサービス開始のボタンであることを理解してもらいたくて、初めに押してもらいたい.そのため初めはFalse.
-        icon_on: mdiSpeaker,
-        icon_off: mdiSpeakerOff, 
+        icon_on: mdiMicrophone,
+        icon_off: mdiMicrophoneOff, 
     }
   },
   methods: {
