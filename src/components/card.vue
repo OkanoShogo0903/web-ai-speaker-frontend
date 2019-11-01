@@ -16,7 +16,7 @@
                 <div class=".overline" style="margin-right:auto;">{{ response.text }}</div>
             </div>
             <div v-if="response.type === 1">
-                <youtube_controller ref="yc" v-bind:videoId="response.video_id" v-bind:videoTitle="response.title" v-bind:initPlaying="index ? false : true">
+                <youtube_controller ref="yc" v-bind:videoId="response.videoid" v-bind:videoTitle="response.title" v-bind:is_newest_card="index ? false : true">
                 </youtube_controller>
             </div>
         </v-card-text>

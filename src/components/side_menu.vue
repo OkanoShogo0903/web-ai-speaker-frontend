@@ -6,6 +6,10 @@
   >
   <v-layout>
   <v-container>
+  <v-list
+    nav
+    dense
+  >
     <!--
       サービスのアイコン
     -->
@@ -22,7 +26,10 @@
           有効にする
         </v-list-item-title>
         <v-list-item-icon>
-          <tts_switch/>
+          <event_switch
+            v-bind:default="true"
+            v-bind:change_event_name="`tts-switch-change-event`"
+          />
         </v-list-item-icon>
       </v-list-item>
     </v-list-group>
@@ -57,6 +64,26 @@
       </v-list-item>
     </v-list-group>
 
+    <v-divider></v-divider>
+
+    <v-list-group :append-icon="icon_append" :prepend-icon="icon_sound">
+      <template v-slot:activator>
+        <v-list-item-title>動画自動再生</v-list-item-title>
+      </template>
+      <v-list-item>
+        <v-list-item-title>
+          有効にする
+        </v-list-item-title>
+        <v-list-item-icon>
+          <event_switch
+            v-bind:default="true"
+            v-bind:change_event_name="`video-switch-change-event`"
+          />
+        </v-list-item-icon>
+      </v-list-item>
+    </v-list-group>
+
+  </v-list>
   </v-container>
   </v-layout>
   </v-navigation-drawer>
@@ -64,7 +91,7 @@
 
 <script>
 import Vue from 'vue'
-import tts_switch from './tts_switch';
+import event_switch from './event_switch';
 import { mdiChevronDown, mdiAlphabeticalVariant, mdiVolumeHigh, mdiPlusCircle, mdiClose, mdiHelpCircle, mdiSettingsOutline} from '@mdi/js';
 
 export default {
@@ -89,9 +116,16 @@ export default {
             this.new_word = ""
         }
     },
+    videoSwitchBroadcast(is){
+        console.log("videoSwitchBroadcast " + is)
+        Vue.prototype.$video_switch = is
+    },
   },
   components: {
-    tts_switch,
+    event_switch,
+  },
+  mounted: function() {
+    this.$event_bus.$on('video-switch-change-event', this.videoSwitchBroadcast)
   },
 }
 </script>

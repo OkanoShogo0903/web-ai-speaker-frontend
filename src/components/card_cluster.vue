@@ -31,13 +31,7 @@ export default {
               console.log(res)
               if(res.status === 200 || res.status === 210){
                   this.addResult(res.data)
-                  /*
-                  if (res.data.type == 1){
-                      // TOOD: デフォルトで先頭のイベントを再生するかどうか
-                      //this.$event_bus.$emit('pause-event');
-                      //this.$event_bus.$emit('play-event');
-                  }
-                  */
+                  this.$event_bus.$emit('auto-play-event')
                   this.$event_bus.$emit('tts-request', res.data.text);
               }
           })
