@@ -1,11 +1,10 @@
 <template>
   <v-app-bar app clipped-left>
-    <!--
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-    -->
 
     <v-toolbar-title class="text-uppercase">
       <span class="mr-1"> {{ title }}</span>
+    </v-toolbar-title>
+    <v-toolbar-title>
       <span class="mr-1 font-weight-light"> ver{{ version }} </span>
     </v-toolbar-title>
     <v-spacer></v-spacer>

@@ -6,16 +6,12 @@
   >
   <v-layout>
   <v-container>
-      <v-img
-        :src="require('../assets/logo.svg')"
-        contain
-        height="30"
-      ></v-img>
-
     <!--
       サービスのアイコン
     -->
+    <!--
     <v-divider></v-divider>
+    -->
 
     <v-list-group :append-icon="icon_append" :prepend-icon="icon_sound">
       <template v-slot:activator>
