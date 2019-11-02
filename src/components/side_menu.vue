@@ -26,9 +26,10 @@
           有効にする
         </v-list-item-title>
         <v-list-item-icon>
-          <event_switch
-            v-bind:default="true"
-            v-bind:change_event_name="`tts-switch-change-event`"
+          <v-switch
+            color="primary"
+            v-model="read_state"
+            @change="Vue.prototype.$readout_switch = read_state"
           />
         </v-list-item-icon>
       </v-list-item>
@@ -66,7 +67,7 @@
 
     <v-divider></v-divider>
 
-    <v-list-group :append-icon="icon_append" :prepend-icon="icon_sound">
+    <v-list-group :append-icon="icon_append" :prepend-icon="icon_autoplay">
       <template v-slot:activator>
         <v-list-item-title>動画自動再生</v-list-item-title>
       </template>
@@ -75,9 +76,10 @@
           有効にする
         </v-list-item-title>
         <v-list-item-icon>
-          <event_switch
-            v-bind:default="true"
-            v-bind:change_event_name="`video-switch-change-event`"
+          <v-switch
+            color="primary"
+            v-model="video_state"
+            @change="Vue.prototype.$video_switch = video_state"
           />
         </v-list-item-icon>
       </v-list-item>
@@ -91,12 +93,14 @@
 
 <script>
 import Vue from 'vue'
-import event_switch from './event_switch';
-import { mdiChevronDown, mdiAlphabeticalVariant, mdiVolumeHigh, mdiPlusCircle, mdiClose, mdiHelpCircle, mdiSettingsOutline} from '@mdi/js';
+import { mdiArrowRightDropCircleOutline, mdiChevronDown, mdiAlphabeticalVariant, mdiVolumeHigh, mdiPlusCircle, mdiClose, mdiHelpCircle, mdiSettingsOutline} from '@mdi/js';
 
 export default {
   data: function() {
     return {
+        read_state: true,
+        video_state: true,
+        icon_autoplay: mdiArrowRightDropCircleOutline,
         icon_append: mdiChevronDown,
         icon_close: mdiClose,
         icon_plse: mdiPlusCircle,
@@ -116,16 +120,10 @@ export default {
             this.new_word = ""
         }
     },
-    videoSwitchBroadcast(is){
-        console.log("videoSwitchBroadcast " + is)
-        Vue.prototype.$video_switch = is
-    },
-  },
-  components: {
-    event_switch,
   },
   mounted: function() {
-    this.$event_bus.$on('video-switch-change-event', this.videoSwitchBroadcast)
+    Vue.prototype.$readout_switch = this.read_state
+    Vue.prototype.$video_switch = this.video_state
   },
 }
 </script>

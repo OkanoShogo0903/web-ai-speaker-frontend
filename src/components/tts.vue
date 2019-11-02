@@ -7,21 +7,16 @@ import Vue from 'vue'
 export default {
   data() {
     return {
-      tts_state: false,
       docomo_endpoint: "https://api.apigw.smt.docomo.ne.jp/crayon/v1/textToSpeech?APIKEY=", // "http://localhost:8080/speech"
     }
   },
   methods: {
-    switchRenew(is) {
-      this.tts_state = Boolean( is )
-      console.log("tts_state " + this.tts_state)
-    },
     switching(text) {
       // TODO: select voice api
       this.googleTTS(text)
     },
     googleTTS(text) {
-      if ( this.tts_state === true ) {
+      if ( this.$readout_switch === true ) {
         console.log("TTS" + text)
         // 発言を作成
         const uttr = new SpeechSynthesisUtterance("Hello!")
@@ -30,7 +25,7 @@ export default {
       }
     },
     docomoAPI(text) {
-      if ( this.tts_state === true ) {
+      if ( this.$readout_switch === true ) {
         function string_to_buffer(src) {
           return (new Uint16Array([].map.call(src, function(c) {
             return c.charCodeAt(0)
@@ -70,7 +65,6 @@ export default {
   },
   mounted: function(){
       this.$event_bus.$on('tts-request', this.switching)
-      this.$event_bus.$on('tts-switch-change-event', this.switchRenew)
   },
 }
 </script>
