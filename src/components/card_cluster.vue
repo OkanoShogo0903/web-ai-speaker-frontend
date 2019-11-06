@@ -51,7 +51,7 @@ export default {
   },
   created: function() {
       // For tutorial
-      this.addResult({title: "チュートリアル", text: "マイクを許可して、 「" + this.wakeup_word + "、チュートリアルについて検索」 と言って見ましょう", type: 0, video_id: null})
+      this.addResult({title: "チュートリアル", text: "マイクを許可して、 「" + this.wakeup_word + "、あいみょんを再生して」 と言って見ましょう", type: 0, video_id: null})
 
       // For network test
       //this.card_request("タピオカについて検索")

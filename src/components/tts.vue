@@ -17,7 +17,6 @@ export default {
     },
     googleTTS(text) {
       if ( this.$readout_switch === true ) {
-        console.log("TTS" + text)
         // 発言を作成
         const uttr = new SpeechSynthesisUtterance(text)
         // 発言を再生 (発言キューに発言を追加)

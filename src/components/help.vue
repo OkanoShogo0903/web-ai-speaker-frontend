@@ -2,17 +2,23 @@
   <div class="text-center">
     <v-overlay :value="is_overlay" :opacity="opacity">
       <div>
-        このサービスについて <br/><br/>
-        PCで全画面ゲームやFPSとかのリアルタイム対人ゲームしてる時にブラウザに戻るのって面倒だよね <br/>
-        これはそんな時にサブディスプレイにこのブラウザを開いておけば音声認識だけで検索したりBGMを流したりできるサービスです <br/><br/><br/>
+        検索関連 <br/><br/>
+        〜について検索 <br/>
+        〜を調べて <br/>
 
-        検索系 <br/>
-        〜について検索して <br/>
-        〜を調べて <br/><br/><br/>
+        <v-divider></v-divider>
         
-        BGM再生 <br/>
+        動画の再生 <br/><br/>
         〜を再生して <br/>
-        〜を流して <br/><br/><br/>
+        〜を流して <br/>
+
+        <v-divider></v-divider>
+
+        動画の操作 <br/><br/>
+        再生、 スタート<br/>
+        止めて、 stop、 ストップ、 停止<br/>
+        ミュート<br/>
+        ミュート解除<br/><br/>
       </div>
 
       <v-btn
