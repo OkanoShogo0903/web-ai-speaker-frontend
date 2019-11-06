@@ -11,7 +11,7 @@ export default {
     }
   },
   methods: {
-    switching(text) {
+    ttsHub(text) {
       // TODO: select voice api
       this.googleTTS(text)
     },
@@ -19,7 +19,7 @@ export default {
       if ( this.$readout_switch === true ) {
         console.log("TTS" + text)
         // 発言を作成
-        const uttr = new SpeechSynthesisUtterance("Hello!")
+        const uttr = new SpeechSynthesisUtterance(text)
         // 発言を再生 (発言キューに発言を追加)
         speechSynthesis.speak(uttr)
       }
@@ -64,7 +64,7 @@ export default {
 
   },
   mounted: function(){
-      this.$event_bus.$on('tts-request', this.switching)
+      this.$event_bus.$on('tts-request', this.ttsHub)
   },
 }
 </script>
