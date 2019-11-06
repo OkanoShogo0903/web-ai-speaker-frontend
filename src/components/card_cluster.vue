@@ -29,10 +29,14 @@ export default {
           axios.post(this.ai_speaker_endpoint, {text: body_text})
           .then(res => {
               console.log(res)
-              if(res.status === 200 || res.status === 210){
+              if (res.status === 200) {
                   this.addResult(res.data)
-                  this.$event_bus.$emit('auto-play-event')
-                  this.$event_bus.$emit('tts-request', res.data.text);
+                  if (res.data.type === 0) { // 検索時
+                    this.$event_bus.$emit('tts-request', res.data.text);
+                  }
+              }
+              if (res.status === 210) {
+                  this.addResult(res.data)
               }
           })
           .catch(error => {
@@ -51,7 +55,7 @@ export default {
 
       // For network test
       //this.card_request("タピオカについて検索")
-      this.card_request("ハローワールドを再生して")
+      //this.card_request("ハローワールドを再生して")
       //this.card_request("グランドエスケープを再生して")
   },
   mounted: function(){
