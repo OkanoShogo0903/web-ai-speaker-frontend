@@ -98,7 +98,7 @@ import { mdiArrowRightDropCircleOutline, mdiChevronDown, mdiAlphabeticalVariant,
 export default {
   data: function() {
     return {
-        read_state: true,
+        read_state: false,
         video_state: true,
         icon_autoplay: mdiArrowRightDropCircleOutline,
         icon_append: mdiChevronDown,
